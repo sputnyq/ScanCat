@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {ReadDirItem} from 'react-native-fs';
-import {ScrollView, View, Image, StyleSheet, FlatList} from 'react-native';
-import {listFiles} from '../features/FileUtils';
+import React from 'react';
+import {FlatList, Image, StyleSheet, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../store';
 
 type ScanFile = {
   name: string;
@@ -9,16 +9,13 @@ type ScanFile = {
 };
 
 export default function DocsOverview() {
-  const [files, setFiles] = useState<ReadDirItem[]>([]);
+  const appFiles = useSelector<RootState, AppFile[]>(s => s.files.appFiles);
 
-  useEffect(() => {
-    listFiles().then(listed => {
-      console.log('tstst');
-      setFiles([...listed]);
-    });
-  }, []);
+  const sorted = [...appFiles].sort((a, b) => {
+    return (b.timeStamp || 0) - (a.timeStamp || 0);
+  });
 
-  const itemData = files.map(file => {
+  const itemData = sorted.map(file => {
     return {
       icon: <Image style={styles.image} source={{uri: file.path}}></Image>,
     };

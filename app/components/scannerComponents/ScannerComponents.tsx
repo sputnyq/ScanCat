@@ -6,19 +6,24 @@ import DocumentScanner, {
   ScanDocumentResponseStatus,
 } from 'react-native-document-scanner-plugin';
 import {IS_PDF} from '../settings/SettingsKeys';
-import {moveFile} from '../features/FileUtils';
+import {moveFile, readFile} from '../features/FileUtils';
+import {useDispatch} from 'react-redux';
+import {addSingleFile} from '../../store/reducers/filesReducer';
 
 export default function ScannerComponents() {
+  const dispatch = useDispatch();
+
   const scanDocument = () => {
     const isPdf = Settings.get(IS_PDF);
 
     DocumentScanner.scanDocument().then(res => {
       if (res?.status === ScanDocumentResponseStatus.Success) {
-        console.log('success');
-        res.scannedImages?.forEach(si => {
-          console.log('tada');
-          console.log(si);
-          moveFile(si);
+        res.scannedImages?.forEach(async (si, idx) => {
+          const filePath = await moveFile(si, idx);
+          const newAppFile = await readFile(filePath);
+          if (newAppFile) {
+            dispatch(addSingleFile({file: newAppFile}));
+          }
         });
       }
     });

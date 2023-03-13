@@ -21,15 +21,9 @@ export default function FormatModule() {
     <SettingsModule>
       <Label label="Format" />
       <CardBlock>
-        <Selectable
-          selected={isPDF}
-          onSelect={onSelect(true)}
-          label="PDF"></Selectable>
+        <Selectable selected={isPDF} onSelect={onSelect(true)} label="PDF" />
         <Divider />
-        <Selectable
-          selected={!isPDF}
-          onSelect={onSelect(false)}
-          label="JPEG"></Selectable>
+        <Selectable selected={!isPDF} onSelect={onSelect(false)} label="JPEG" />
       </CardBlock>
     </SettingsModule>
   );
