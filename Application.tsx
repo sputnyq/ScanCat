@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Colors} from './Styles';
-import DocumentsDisplay from './components/documents-display/DocumentsDisplay';
-import ScannerComponents from './components/scannerComponents/ScannerComponents';
-import Toolsbar from './components/toolsbar/Toolsbar';
+import DocumentsDisplay from './app/components/documents-display/DocumentsDisplay';
+import ScannerComponents from './app/components/scannerComponents/ScannerComponents';
+import Toolsbar from './app/components/toolsbar/Toolsbar';
 
 import * as RNFS from 'react-native-fs';
 
