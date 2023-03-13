@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Svg, {Path} from 'react-native-svg';
-import {Colors} from '../../Styles';
+import {Colors} from '../../../Styles';
 
 const CheckIcon = props => (
   <Svg

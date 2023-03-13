@@ -1,16 +1,17 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
-import {Colors, FontSizes} from '../../Styles';
+import {StyleSheet, View, Text, ScrollView} from 'react-native';
+import {Colors, FontSizes} from '../../../Styles';
 import EmptyState from '../empty-state/EmptyState';
+import DocsOverview from './DocsOverview';
 
 export default function DocumentsDisplay() {
-  const noDocs = true;
+  const noDocs = false;
   return (
     <View style={styles.root}>
       <View>
         <Text style={styles.header}>My Scans</Text>
       </View>
-      {noDocs ? <EmptyState /> : null}
+      {noDocs ? <EmptyState /> : <DocsOverview />}
     </View>
   );
 }

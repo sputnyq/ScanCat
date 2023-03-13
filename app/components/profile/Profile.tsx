@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Text, StyleSheet, View} from 'react-native';
-import {Colors, FontSizes} from '../../Styles';
+import {Colors, FontSizes} from '../../../Styles';
 import Grabber from '../commons/Grabber';
 import BackupModule from '../settings/BackupModule';
 import FormatModule from '../settings/FormatModule';

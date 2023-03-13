@@ -1,6 +1,6 @@
 import React from 'react';
 import {Switch} from 'react-native';
-import {Colors} from '../../Styles';
+import {Colors} from '../../../Styles';
 
 export default function AppSwitch(props) {
   const {value, onValueChange} = props;
