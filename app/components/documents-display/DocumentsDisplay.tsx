@@ -1,11 +1,16 @@
 import React from 'react';
 import {StyleSheet, View, Text, ScrollView} from 'react-native';
+import {useSelector} from 'react-redux';
 import {Colors, FontSizes} from '../../../Styles';
+import {RootState} from '../../store';
 import EmptyState from '../empty-state/EmptyState';
 import DocsOverview from './DocsOverview';
 
 export default function DocumentsDisplay() {
-  const noDocs = false;
+  const appFiles = useSelector<RootState, AppFile[]>(s => s.files.appFiles);
+
+  const noDocs = appFiles.length === 0;
+
   return (
     <View style={styles.root}>
       <View>

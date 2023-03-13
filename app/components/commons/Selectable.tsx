@@ -20,7 +20,7 @@ export default function Selectable(props: PropsWithChildren<Props>) {
         {children ? (
           <View>{children}</View>
         ) : (
-          <View>{selected && <CheckIcon />}</View>
+          <View>{selected ? <CheckIcon /> : null}</View>
         )}
       </View>
     </TouchableNativeFeedback>
