@@ -1,7 +1,6 @@
 import React from 'react';
-import {Button, Text, StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {Colors, FontSizes} from '../../../Styles';
-import Grabber from '../commons/Grabber';
 import BackupModule from '../settings/BackupModule';
 import FormatModule from '../settings/FormatModule';
 
@@ -13,17 +12,13 @@ export default function Profile(props: Props) {
   const {onClose} = props;
 
   return (
-    <View style={styles.root}>
-      <Grabber />
-      <View style={styles.bar}>
-        <Button color={Colors.main} onPress={onClose} title={'Close'} />
-      </View>
+    <>
       <View style={styles.header}>
         <Text style={styles.headerText}>Settings</Text>
       </View>
       <FormatModule />
       <BackupModule />
-    </View>
+    </>
   );
 }
 
