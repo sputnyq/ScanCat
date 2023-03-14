@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Modal, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Colors} from '../../../Styles';
+import AppModal from '../commons/AppModal';
 import SmileyIcon from '../icons/SmileyIcon';
 import Profile from '../profile/Profile';
 
@@ -26,13 +27,9 @@ export default function Toolsbar() {
       <View>
         <Button color={Colors.white} title="Select"></Button>
       </View>
-      <Modal
-        presentationStyle="pageSheet"
-        animationType="slide"
-        onRequestClose={closeProfileModal}
-        visible={visible}>
+      <AppModal onRequestClose={closeProfileModal} visible={visible}>
         <Profile onClose={closeProfileModal} />
-      </Modal>
+      </AppModal>
     </View>
   );
 }

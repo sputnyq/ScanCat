@@ -2,6 +2,7 @@ import React from 'react';
 import {FlatList, Image, StyleSheet, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store';
+import ImagePreview from './ImagePreview';
 
 type ScanFile = {
   name: string;
@@ -17,7 +18,7 @@ export default function DocsOverview() {
 
   const itemData = sorted.map(file => {
     return {
-      icon: <Image style={styles.image} source={{uri: file.path}}></Image>,
+      renderer: <ImagePreview file={file} />,
     };
   });
   return (
@@ -28,7 +29,7 @@ export default function DocsOverview() {
 }
 
 const Item = ({item}: any) => {
-  return <View style={styles.wrapper}>{item.icon}</View>;
+  return <View style={styles.wrapper}>{item.renderer}</View>;
 };
 
 const styles = StyleSheet.create({
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 90,
-    height: 220,
+    height: 150,
     resizeMode: 'contain',
   },
 });

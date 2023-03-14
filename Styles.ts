@@ -15,4 +15,5 @@ export namespace Colors {
 
 export namespace FontSizes {
   export const big = 35;
+  export const small = 12;
 }
