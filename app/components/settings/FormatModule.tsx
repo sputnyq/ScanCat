@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Settings} from 'react-native';
+import i18n from '../../i18n';
 import CardBlock from '../commons/CardBlock';
 import Divider from '../commons/Divider';
 import Label from '../commons/Label';
@@ -19,7 +20,7 @@ export default function FormatModule() {
 
   return (
     <SettingsModule>
-      <Label label="Format" />
+      <Label label={i18n('format')} />
       <CardBlock>
         <Selectable selected={isPDF} onSelect={onSelect(true)} label="PDF" />
         <Divider />

@@ -10,6 +10,7 @@ import {addSingleFile} from '../../store/reducers/filesReducer';
 import {moveFile, readFile} from '../features/FileUtils';
 import {IS_PDF} from '../settings/SettingsKeys';
 import {Alert} from 'react-native';
+import i18n from '../../i18n';
 
 export default function ScannerComponents() {
   const dispatch = useDispatch();
@@ -31,11 +32,11 @@ export default function ScannerComponents() {
     const defaultText = `Scan-${date.toLocaleString()}`;
 
     Alert.prompt(
-      'Input file Name',
+      i18n('inputFileName'),
       undefined,
       [
-        {text: 'cancel', onPress: onCancel},
-        {text: 'OK', onPress: onOk},
+        {text: i18n('cancel') || 'cancel', onPress: onCancel},
+        {text: i18n('ok') || 'OK', onPress: onOk},
       ],
       'plain-text',
       defaultText,

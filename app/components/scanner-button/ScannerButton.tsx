@@ -1,7 +1,6 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors, FontSizes} from '../../../Styles';
 import TouchableIcon from '../commons/TouchableIcon';
 
@@ -14,6 +13,9 @@ export default function ScannerButton({onPress}: Props) {
     <View style={styles.root}>
       <View style={styles.shadow1}>
         <View style={styles.shadow2}>
+          {
+            //TODO: do sth with colors
+          }
           <LinearGradient style={styles.touch} colors={['#793ac1', '#8f44e5']}>
             <TouchableIcon
               touchProps={{
@@ -25,13 +27,6 @@ export default function ScannerButton({onPress}: Props) {
                 color: Colors.white,
               }}
             />
-            {/* <TouchableOpacity onPress={props.onTap}>
-              <Icon
-                name="ios-scan"
-                size={FontSizes.huge}
-                color={Colors.white}
-              />
-            </TouchableOpacity> */}
           </LinearGradient>
         </View>
       </View>

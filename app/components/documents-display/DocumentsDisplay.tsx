@@ -15,7 +15,7 @@ export default function DocumentsDisplay() {
   return (
     <View style={styles.root}>
       <View>
-        <Text style={styles.header}>{i18n.t('myScans')}</Text>
+        <Text style={styles.header}>{i18n('myScans')}</Text>
       </View>
       {noDocs ? <EmptyState /> : <DocsOverview />}
     </View>

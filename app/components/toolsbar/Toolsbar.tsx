@@ -26,7 +26,7 @@ export default function Toolsbar() {
         </TouchableOpacity>
       </View>
       <View>
-        <Button color={Colors.white} title={i18n.t('select')}></Button>
+        <Button color={Colors.white} title={i18n('select')}></Button>
       </View>
       <AppModal onRequestClose={closeProfileModal} visible={visible}>
         <Profile />

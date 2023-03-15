@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-export default function SettingsModule(props) {
+export default function SettingsModule(props: React.PropsWithChildren) {
   return <View style={styles.root}>{props.children}</View>;
 }
 
