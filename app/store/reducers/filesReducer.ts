@@ -8,6 +8,10 @@ const filesSlice = createSlice({
   name: 'files',
   initialState,
   reducers: {
+    deleteSingleFile: (state, action: PayloadAction<{file: AppFile}>) => {
+      const {path} = action.payload.file;
+      state.appFiles = state.appFiles.filter(f => f.path !== path);
+    },
     addSingleFile: (state, action: PayloadAction<{file: AppFile}>) => {
       state.appFiles.push(action.payload.file);
     },
@@ -20,6 +24,7 @@ const filesSlice = createSlice({
   },
 });
 
-export const {addSingleFile, addFiles, clearFiles} = filesSlice.actions;
+export const {addSingleFile, addFiles, clearFiles, deleteSingleFile} =
+  filesSlice.actions;
 
 export default filesSlice.reducer;

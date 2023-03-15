@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   header: {
     color: Colors.white,
-    fontSize: FontSizes.big,
+    fontSize: FontSizes.huge,
     fontWeight: 'bold',
   },
 });

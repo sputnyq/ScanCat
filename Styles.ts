@@ -11,9 +11,12 @@ export namespace Colors {
   export const gray300 = '#E0E0E0';
 
   export const gray600 = '#757575';
+  export const red = '#ff0000';
 }
 
 export namespace FontSizes {
-  export const big = 35;
+  export const huge = 35;
+  export const big = 28;
+  export const large = 24;
   export const small = 12;
 }
