@@ -28,7 +28,7 @@ export default function Toolsbar() {
         <Button color={Colors.white} title="Select"></Button>
       </View>
       <AppModal onRequestClose={closeProfileModal} visible={visible}>
-        <Profile onClose={closeProfileModal} />
+        <Profile />
       </AppModal>
     </View>
   );

@@ -4,13 +4,7 @@ import {Colors, FontSizes} from '../../../Styles';
 import BackupModule from '../settings/BackupModule';
 import FormatModule from '../settings/FormatModule';
 
-type Props = {
-  onClose: () => void;
-};
-
-export default function Profile(props: Props) {
-  const {onClose} = props;
-
+export default function Profile() {
   return (
     <>
       <View style={styles.header}>
