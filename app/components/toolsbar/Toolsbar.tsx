@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Modal, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Colors} from '../../../Styles';
+import i18n from '../../i18n';
 import AppModal from '../commons/AppModal';
 import SmileyIcon from '../icons/SmileyIcon';
 import Profile from '../profile/Profile';
@@ -25,7 +26,7 @@ export default function Toolsbar() {
         </TouchableOpacity>
       </View>
       <View>
-        <Button color={Colors.white} title="Select"></Button>
+        <Button color={Colors.white} title={i18n.t('select')}></Button>
       </View>
       <AppModal onRequestClose={closeProfileModal} visible={visible}>
         <Profile />

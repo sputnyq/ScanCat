@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text, ScrollView} from 'react-native';
 import {useSelector} from 'react-redux';
 import {Colors, FontSizes} from '../../../Styles';
+import i18n from '../../i18n';
 import {RootState} from '../../store';
 import EmptyState from '../empty-state/EmptyState';
 import DocsOverview from './DocsOverview';
@@ -14,7 +15,7 @@ export default function DocumentsDisplay() {
   return (
     <View style={styles.root}>
       <View>
-        <Text style={styles.header}>My Scans</Text>
+        <Text style={styles.header}>{i18n.t('myScans')}</Text>
       </View>
       {noDocs ? <EmptyState /> : <DocsOverview />}
     </View>
