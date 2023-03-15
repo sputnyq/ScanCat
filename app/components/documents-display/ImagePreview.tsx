@@ -2,6 +2,11 @@ import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Colors, FontSizes} from '../../../Styles';
 import AppModal from '../commons/AppModal';
+import TouchableIcon from '../commons/TouchableIcon';
+import {Alert} from 'react-native';
+import {deleteFile} from '../features/FileUtils';
+import {useDispatch} from 'react-redux';
+import {deleteSingleFile} from '../../store/reducers/filesReducer';
 
 type Props = {
   file: AppFile;
@@ -11,12 +16,38 @@ export default function ImagePreview(props: Props) {
   const {file} = props;
   const [showModal, setShowModal] = useState(false);
 
+  const dispatch = useDispatch();
+
   const handleTouch = () => {
     setShowModal(true);
   };
 
   const closeModal = () => {
     setShowModal(false);
+  };
+
+  const _deleteFile = () => {
+    dispatch(deleteSingleFile({file}));
+    closeModal();
+    deleteFile(file.path);
+  };
+
+  const createConfirmDeletionAlert = () => {
+    Alert.alert(
+      'Dokument löschen',
+      'Möchtest du das Dokument undwiderruflich löschen?',
+      [
+        {
+          text: 'Löschen',
+          style: 'destructive',
+          onPress: _deleteFile,
+        },
+        {
+          text: 'Abbrechen',
+          style: 'cancel',
+        },
+      ],
+    );
   };
 
   return (
@@ -26,7 +57,14 @@ export default function ImagePreview(props: Props) {
           <View style={styles.fullSizeWrapper}>
             <Image style={styles.fullSize} source={{uri: file.path}} />
           </View>
-          <View style={styles.editBar} />
+          <View style={styles.editBar}>
+            <TouchableIcon iconProps={{name: 'ios-share-outline'}} />
+
+            <TouchableIcon
+              touchProps={{onPress: createConfirmDeletionAlert}}
+              iconProps={{name: 'ios-trash-outline', color: Colors.red}}
+            />
+          </View>
         </View>
       </AppModal>
       <View>
@@ -46,7 +84,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   editBar: {
+    paddingBottom: 20,
+    flexDirection: 'row',
     height: 80,
+    backgroundColor: Colors.white,
   },
   fullSize: {
     width: '100%',

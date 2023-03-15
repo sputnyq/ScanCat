@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   headerText: {
-    fontSize: FontSizes.big,
+    fontSize: FontSizes.huge,
     fontWeight: 'bold',
   },
 });

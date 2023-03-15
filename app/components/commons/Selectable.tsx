@@ -1,6 +1,7 @@
 import React, {PropsWithChildren} from 'react';
 import {StyleSheet, Text, TouchableNativeFeedback, View} from 'react-native';
-import CheckIcon from '../icons/CheckIcon';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {Colors, FontSizes} from '../../../Styles';
 
 type Props = {
   label: string;
@@ -20,7 +21,15 @@ export default function Selectable(props: PropsWithChildren<Props>) {
         {children ? (
           <View>{children}</View>
         ) : (
-          <View>{selected ? <CheckIcon /> : null}</View>
+          <View>
+            {selected ? (
+              <Icon
+                name="ios-checkmark-outline"
+                color={Colors.main}
+                size={FontSizes.large}
+              />
+            ) : null}
+          </View>
         )}
       </View>
     </TouchableNativeFeedback>

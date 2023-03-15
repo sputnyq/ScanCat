@@ -1,22 +1,37 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {Colors} from '../../../Styles';
-import ScannerIcon from '../icons/ScannerIcon';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {Colors, FontSizes} from '../../../Styles';
+import TouchableIcon from '../commons/TouchableIcon';
 
 type Props = {
-  onTap: () => void;
+  onPress: () => void;
 };
 
-export default function ScannerButton(props: Props) {
+export default function ScannerButton({onPress}: Props) {
   return (
     <View style={styles.root}>
       <View style={styles.shadow1}>
         <View style={styles.shadow2}>
           <LinearGradient style={styles.touch} colors={['#793ac1', '#8f44e5']}>
-            <TouchableOpacity onPress={props.onTap}>
-              <ScannerIcon />
-            </TouchableOpacity>
+            <TouchableIcon
+              touchProps={{
+                onPress,
+              }}
+              iconProps={{
+                name: 'ios-scan',
+                size: FontSizes.huge,
+                color: Colors.white,
+              }}
+            />
+            {/* <TouchableOpacity onPress={props.onTap}>
+              <Icon
+                name="ios-scan"
+                size={FontSizes.huge}
+                color={Colors.white}
+              />
+            </TouchableOpacity> */}
           </LinearGradient>
         </View>
       </View>

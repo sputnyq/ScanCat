@@ -9,6 +9,10 @@ export const moveFile = async (src: string, idx: number) => {
   return newPath;
 };
 
+export const deleteFile = async (path: string) => {
+  return RNFS.unlink(path);
+};
+
 export const listFiles = async () => {
   return RNFS.readDir(rootDir);
 };
