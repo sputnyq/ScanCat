@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Settings} from 'react-native';
+import i18n from '../../i18n';
 
 import AppSwitch from '../commons/AppSwitch';
 import CardBlock from '../commons/CardBlock';
@@ -18,8 +19,8 @@ export default function BackupModule() {
   return (
     <SettingsModule>
       <CardBlock>
-        <Selectable label="iCloud Backup">
-          <AppSwitch onValueChange={onValueChange} value={checked}></AppSwitch>
+        <Selectable label={i18n('icloudBackup')}>
+          <AppSwitch onValueChange={onValueChange} value={checked} />
         </Selectable>
       </CardBlock>
     </SettingsModule>

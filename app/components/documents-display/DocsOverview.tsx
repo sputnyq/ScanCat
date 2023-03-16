@@ -4,11 +4,6 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../store';
 import ImagePreview from './ImagePreview';
 
-type ScanFile = {
-  name: string;
-  path: string;
-};
-
 export default function DocsOverview() {
   const appFiles = useSelector<RootState, AppFile[]>(s => s.files.appFiles);
 

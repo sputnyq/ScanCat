@@ -1,6 +1,7 @@
 import React from 'react';
 import {ModalProps, Button, Modal, View, StyleSheet} from 'react-native';
 import {Colors} from '../../../Styles';
+import i18n from '../../i18n';
 import Grabber from './Grabber';
 
 export default function AppModal(props: ModalProps) {
@@ -13,7 +14,7 @@ export default function AppModal(props: ModalProps) {
           <Button
             color={Colors.main}
             onPress={onRequestClose}
-            title={'Close'}
+            title={i18n('close')}
           />
         </View>
         {props.children}

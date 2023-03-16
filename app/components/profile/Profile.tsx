@@ -1,20 +1,15 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Colors, FontSizes} from '../../../Styles';
+import i18n from '../../i18n';
 import BackupModule from '../settings/BackupModule';
 import FormatModule from '../settings/FormatModule';
 
-type Props = {
-  onClose: () => void;
-};
-
-export default function Profile(props: Props) {
-  const {onClose} = props;
-
+export default function Profile() {
   return (
     <>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Settings</Text>
+        <Text style={styles.headerText}>{i18n('settings')}</Text>
       </View>
       <FormatModule />
       <BackupModule />

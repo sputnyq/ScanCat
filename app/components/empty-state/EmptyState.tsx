@@ -10,6 +10,9 @@ export default function EmptyState() {
         <LitterboxIcon />
       </View>
       <View>
+        {
+          //TODO: translate
+        }
         <Text style={styles.text2}>No 'sheet' in the box.</Text>
         <Text style={styles.text1}>Anything to add?</Text>
       </View>
