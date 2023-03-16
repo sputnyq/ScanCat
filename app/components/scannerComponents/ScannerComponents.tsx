@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Settings} from 'react-native';
 import ScannerButton from '../scanner-button/ScannerButton';
 
@@ -19,18 +19,56 @@ export default function ScannerComponents() {
     undefined,
   );
 
+  useEffect(() => {
+    if (scannedImages?.length) {
+      createNameInputAlert();
+    }
+  }, [scannedImages]);
+
+  const getDefaultFileName = () => {
+    const date = new Date();
+    return `Scan-${date.toLocaleString()}`;
+  };
+
   const onCancel = () => {
     //TODO: delete files
     setScannedImages(undefined);
   };
 
-  const onOk = (value?: string) => {};
+  const moveImage = async (src: string, fileName: string) => {
+    const filePath = await moveFile(src, fileName);
+
+    const newAppFile = await readFile(filePath);
+
+    if (newAppFile) {
+      dispatch(addSingleFile({file: newAppFile}));
+    }
+  };
+
+  const onOk = async (value?: string) => {
+    if (!scannedImages) {
+      return;
+    }
+
+    if (!value) {
+      value = getDefaultFileName();
+    }
+
+    const filesAmount = scannedImages.length;
+
+    if (filesAmount > 1) {
+      scannedImages.forEach(async (si, idx) => {
+        //TODO: change to rea
+        const fileName = value + `-${idx}.jpeg`;
+
+        await moveImage(si, fileName);
+      });
+    } else {
+      await moveImage(scannedImages[0], value + '.jpeg');
+    }
+  };
 
   const createNameInputAlert = () => {
-    const date = new Date();
-
-    const defaultText = `Scan-${date.toLocaleString()}`;
-
     Alert.prompt(
       i18n('inputFileName'),
       undefined,
@@ -39,7 +77,6 @@ export default function ScannerComponents() {
         {text: i18n('ok') || 'OK', onPress: onOk},
       ],
       'plain-text',
-      defaultText,
     );
   };
 
@@ -49,14 +86,6 @@ export default function ScannerComponents() {
     DocumentScanner.scanDocument().then(res => {
       if (res?.status === ScanDocumentResponseStatus.Success) {
         setScannedImages(res.scannedImages);
-        createNameInputAlert();
-        // res.scannedImages?.forEach(async (si, idx) => {
-        //   const filePath = await moveFile(si, idx);
-        //   const newAppFile = await readFile(filePath);
-        //   if (newAppFile) {
-        //     dispatch(addSingleFile({file: newAppFile}));
-        //   }
-        // });
       }
     });
   };

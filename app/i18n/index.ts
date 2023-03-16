@@ -4,13 +4,32 @@ import * as RNLocalize from 'react-native-localize';
 import en from './en';
 import de from './de';
 
-const locales = RNLocalize.getLocales();
+const supportedLanguages = ['de', 'en'];
+
+const selectLanguage = () => {
+  const userLngs = RNLocalize.getLocales().map(l => l.languageCode);
+
+  let curLng = 'en';
+
+  let i = 0;
+  const {length} = userLngs;
+
+  while (i < length) {
+    if (supportedLanguages.includes(userLngs[i])) {
+      curLng = userLngs[i];
+      i = length;
+      return;
+    }
+    i++;
+  }
+
+  return curLng;
+};
 
 i18next.init({
   compatibilityJSON: 'v3',
   debug: true,
-  //TODO: select right code
-  lng: locales[0].languageCode,
+  lng: selectLanguage(),
   fallbackLng: 'en',
   resources: {
     en: {translation: en},
