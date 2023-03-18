@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import DocumentsDisplay from './components/documents-display';
 import ScannerComponents from './components/scannerComponents/ScannerComponents';
 import Toolsbar from './components/toolsbar/Toolsbar';
@@ -7,18 +8,21 @@ import {Colors} from './Styles';
 
 export default function Application() {
   return (
-    <View style={styles.root}>
-      <Toolsbar />
-      <DocumentsDisplay />
-      <ScannerComponents />
-    </View>
+    <LinearGradient
+      style={styles.full}
+      colors={[Colors.main, Colors.secondary]}>
+      <SafeAreaView style={styles.full}>
+        <StatusBar barStyle={'light-content'} />
+        <Toolsbar />
+        <DocumentsDisplay />
+        <ScannerComponents />
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  root: {
+  full: {
     flex: 1,
-    backgroundColor: Colors.main,
-    paddingTop: 50,
   },
 });
