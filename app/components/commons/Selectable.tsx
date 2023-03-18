@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from 'react';
 import {StyleSheet, Text, TouchableNativeFeedback, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Colors, FontSizes} from '../../../Styles';
+import {Colors, FontSizes} from '../../Styles';
 
 type Props = {
   label: string;

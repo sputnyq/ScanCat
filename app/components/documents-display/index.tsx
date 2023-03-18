@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useSelector} from 'react-redux';
-import {Colors} from '../../../Styles';
+import {Colors} from '../../Styles';
 import {RootState} from '../../store';
 import EmptyState from '../empty-state/EmptyState';
 import {buildDirPath} from '../features/FileUtils';

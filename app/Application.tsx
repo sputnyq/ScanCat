@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import DocumentsDisplay from './components/documents-display';
 import ScannerComponents from './components/scannerComponents/ScannerComponents';
 import Toolsbar from './components/toolsbar/Toolsbar';
-import {Colors} from '../Styles';
+import {Colors} from './Styles';
 
 export default function Application() {
   return (

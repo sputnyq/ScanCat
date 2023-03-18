@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import {Colors} from '../../../Styles';
+import {Colors} from '../../Styles';
 import LitterboxIcon from '../icons/LitterBoxIcon';
 
 export default function EmptyState() {

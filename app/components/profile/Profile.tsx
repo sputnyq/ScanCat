@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Colors, FontSizes} from '../../../Styles';
+import {Colors, FontSizes} from '../../Styles';
 import i18n from '../../i18n';
 import BackupModule from '../settings/BackupModule';
 import FormatModule from '../settings/FormatModule';

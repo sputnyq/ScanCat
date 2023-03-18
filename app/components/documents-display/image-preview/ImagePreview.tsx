@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Colors, FontSizes} from '../../../../Styles';
+import {Colors, FontSizes} from '../../../Styles';
 import AppModal from '../../commons/AppModal';
 import TouchableIcon from '../../commons/TouchableIcon';
 import {Alert} from 'react-native';

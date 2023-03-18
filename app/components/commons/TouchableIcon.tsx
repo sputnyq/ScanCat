@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import {IconProps} from 'react-native-vector-icons/Icon';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Colors, FontSizes} from '../../../Styles';
+import {Colors, FontSizes} from '../../Styles';
 
 type Props = {
   touchProps?: TouchableOpacityProps;

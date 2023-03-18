@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Button, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {Colors} from '../../../Styles';
+import {Colors} from '../../Styles';
 import i18n from '../../i18n';
 import AppModal from '../commons/AppModal';
 import SmileyIcon from '../icons/SmileyIcon';

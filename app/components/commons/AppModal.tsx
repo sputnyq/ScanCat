@@ -1,6 +1,6 @@
 import React from 'react';
 import {ModalProps, Button, Modal, View, StyleSheet} from 'react-native';
-import {Colors} from '../../../Styles';
+import {Colors} from '../../Styles';
 import i18n from '../../i18n';
 import Grabber from './Grabber';
 

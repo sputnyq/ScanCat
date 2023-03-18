@@ -2,7 +2,7 @@ import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useDispatch} from 'react-redux';
-import {Colors} from '../../../../Styles';
+import {Colors} from '../../../Styles';
 import {pushDir} from '../../../store/reducers/filesReducer';
 
 type Props = {

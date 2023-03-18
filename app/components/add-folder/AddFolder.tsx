@@ -6,7 +6,7 @@ import {RootState} from '../../store';
 import {pushDir} from '../../store/reducers/filesReducer';
 import {buildDirPath, createDir} from '../features/FileUtils';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Colors, FontSizes} from '../../../Styles';
+import {Colors, FontSizes} from '../../Styles';
 
 export default function AddFolder() {
   const currentDir = useSelector<RootState, string[]>(s => s.files.currentDir);

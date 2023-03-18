@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import {Colors, FontSizes} from '../../../Styles';
+import {Colors, FontSizes} from '../../Styles';
 import FolderPreview from './folder-preview/FolderPreview';
 import ImagePreview from './image-preview/ImagePreview';
 
