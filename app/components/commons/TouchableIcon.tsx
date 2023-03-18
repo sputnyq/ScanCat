@@ -19,8 +19,8 @@ export default function TouchableIcon(props: Props) {
       <Icon
         color={Colors.main}
         size={FontSizes.big}
-        {...iconProps}
         style={styles.icon}
+        {...iconProps}
       />
     </TouchableOpacity>
   );

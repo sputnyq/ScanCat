@@ -8,6 +8,10 @@ const de = {
   close: 'Schließen',
   icloudBackup: 'Sicherung in iCloud',
   format: 'Format',
+  inputDirName: 'Wie soll dein Ordner heißen?',
+  remove: 'Entfernen',
+  removePromptTitle: 'Scan löschen?',
+  removePrompt: 'Du siehst es nie wieder...',
 };
 
 export default de;

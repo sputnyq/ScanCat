@@ -1,10 +1,12 @@
 import * as RNFS from 'react-native-fs';
+const FILE_SEPARATOR = '/';
 
-const SCANS = '/scans';
-const rootDir = RNFS.DocumentDirectoryPath + SCANS;
-
-export const moveFile = async (src: string, fileName: string) => {
-  const newPath = rootDir + `/${fileName}`;
+export const moveFile = async (
+  src: string,
+  currentDir: string[],
+  fileName: string,
+) => {
+  const newPath = buildDirPath(currentDir) + FILE_SEPARATOR + fileName;
   if (!(await RNFS.exists(newPath))) {
     await RNFS.moveFile(src, newPath);
     return newPath;
@@ -13,13 +15,9 @@ export const moveFile = async (src: string, fileName: string) => {
   }
 };
 
-export const deleteFile = async (path: string) => {
+export async function deleteFile(path: string) {
   return RNFS.unlink(path);
-};
-
-export const listFiles = async () => {
-  return RNFS.readDir(rootDir);
-};
+}
 
 const getNameFromFile = (path: string) => {
   return path.split('/').reverse()[0];
@@ -36,7 +34,25 @@ export const readFile = async (path: string): Promise<AppFile | undefined> => {
       name: res.name || getNameFromFile(path),
       path: res.path,
       timeStamp,
+      type: 'file',
     };
   }
   return undefined;
 };
+
+export const createDir = async (fullPath: string) => {
+  return RNFS.mkdir(fullPath);
+};
+
+export const getFolderNameFromPath = (path: string) => {
+  return path.split(FILE_SEPARATOR).reverse()[0];
+};
+
+export function buildDirPath(currentDir: string[]) {
+  const root = RNFS.DocumentDirectoryPath;
+  if (currentDir.length === 0) {
+    return root;
+  }
+  const dirPath = currentDir.join(FILE_SEPARATOR);
+  return root + FILE_SEPARATOR + dirPath;
+}

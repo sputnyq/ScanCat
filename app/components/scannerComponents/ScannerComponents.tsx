@@ -1,18 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {Settings} from 'react-native';
 import ScannerButton from '../scanner-button/ScannerButton';
-
 import DocumentScanner, {
   ScanDocumentResponseStatus,
 } from 'react-native-document-scanner-plugin';
-import {useDispatch} from 'react-redux';
-import {addSingleFile} from '../../store/reducers/filesReducer';
-import {moveFile, readFile} from '../features/FileUtils';
-import {IS_PDF} from '../settings/SettingsKeys';
+import {useDispatch, useSelector} from 'react-redux';
 import {Alert} from 'react-native';
 import i18n from '../../i18n';
+import {RootState} from '../../store';
+import {reloadDir} from '../../store/reducers/filesReducer';
+import {moveFile, readFile} from '../features/FileUtils';
 
 export default function ScannerComponents() {
+  const currentDir = useSelector<RootState, string[]>(s => s.files.currentDir);
   const dispatch = useDispatch();
 
   const [scannedImages, setScannedImages] = useState<string[] | undefined>(
@@ -36,12 +35,12 @@ export default function ScannerComponents() {
   };
 
   const moveImage = async (src: string, fileName: string) => {
-    const filePath = await moveFile(src, fileName);
-
-    const newAppFile = await readFile(filePath);
-
-    if (newAppFile) {
-      dispatch(addSingleFile({file: newAppFile}));
+    const filePath = await moveFile(src, currentDir, fileName);
+    if (filePath) {
+      const newAppFile = await readFile(filePath);
+      if (newAppFile) {
+        dispatch(reloadDir());
+      }
     }
   };
 
@@ -81,7 +80,7 @@ export default function ScannerComponents() {
   };
 
   const scanDocument = () => {
-    const isPdf = Settings.get(IS_PDF);
+    // const isPdf = Settings.get(IS_PDF);
 
     DocumentScanner.scanDocument().then(res => {
       if (res?.status === ScanDocumentResponseStatus.Success) {

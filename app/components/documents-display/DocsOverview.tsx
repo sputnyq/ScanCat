@@ -1,24 +1,28 @@
 import React from 'react';
-import {FlatList, Image, StyleSheet, View} from 'react-native';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../store';
-import ImagePreview from './ImagePreview';
+import {FlatList, StyleSheet, View} from 'react-native';
+import FileRenderer from './FileRenderer';
 
-export default function DocsOverview() {
-  const appFiles = useSelector<RootState, AppFile[]>(s => s.files.appFiles);
+type Props = {
+  appFiles: AppFile[];
+};
 
+export default function DocsOverview({appFiles}: Props) {
   const sorted = [...appFiles].sort((a, b) => {
     return (b.timeStamp || 0) - (a.timeStamp || 0);
   });
 
-  const itemData = sorted.map(file => {
-    return {
-      renderer: <ImagePreview file={file} />,
-    };
-  });
+  const itemData = sorted.map(file => ({
+    renderer: <FileRenderer file={file} />,
+  }));
+
   return (
     <View style={styles.root}>
-      <FlatList data={itemData} numColumns={3} renderItem={Item}></FlatList>
+      <FlatList
+        data={itemData}
+        extraData={itemData}
+        numColumns={3}
+        renderItem={Item}
+      />
     </View>
   );
 }
@@ -31,16 +35,13 @@ const styles = StyleSheet.create({
   root: {
     width: '100%',
     flex: 3,
+    paddingTop: 20,
   },
   wrapper: {
     flex: 1,
     maxWidth: '33%',
     alignItems: 'center',
+    justifyContent: 'center',
     padding: 10,
-  },
-  image: {
-    width: 90,
-    height: 150,
-    resizeMode: 'contain',
   },
 });

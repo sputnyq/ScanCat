@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Colors, FontSizes} from '../../../Styles';
-import AppModal from '../commons/AppModal';
-import TouchableIcon from '../commons/TouchableIcon';
+import {Colors, FontSizes} from '../../../../Styles';
+import AppModal from '../../commons/AppModal';
+import TouchableIcon from '../../commons/TouchableIcon';
 import {Alert} from 'react-native';
-import {deleteFile} from '../features/FileUtils';
+import {deleteFile} from '../../features/FileUtils';
 import {useDispatch} from 'react-redux';
-import {deleteSingleFile} from '../../store/reducers/filesReducer';
+import {reloadDir} from '../../../store/reducers/filesReducer';
+import i18n from '../../../i18n';
 
 type Props = {
   file: AppFile;
@@ -27,27 +28,25 @@ export default function ImagePreview(props: Props) {
   };
 
   const _deleteFile = () => {
-    dispatch(deleteSingleFile({file}));
-    closeModal();
-    deleteFile(file.path);
+    deleteFile(file.path).then(() => {
+      dispatch(reloadDir());
+      closeModal();
+    });
   };
 
   const createConfirmDeletionAlert = () => {
-    Alert.alert(
-      'Dokument löschen',
-      'Möchtest du das Dokument undwiderruflich löschen?',
-      [
-        {
-          text: 'Löschen',
-          style: 'destructive',
-          onPress: _deleteFile,
-        },
-        {
-          text: 'Abbrechen',
-          style: 'cancel',
-        },
-      ],
-    );
+    //TODO: translations
+    Alert.alert(i18n('removePromptTitle'), i18n('removePrompt'), [
+      {
+        text: i18n('remove'),
+        style: 'destructive',
+        onPress: _deleteFile,
+      },
+      {
+        text: i18n('cancel'),
+        style: 'cancel',
+      },
+    ]);
   };
 
   return (
@@ -68,12 +67,7 @@ export default function ImagePreview(props: Props) {
         </View>
       </AppModal>
       <View>
-        <View>
-          <Image source={{uri: file.path}} style={styles.image} />
-        </View>
-        <View>
-          <Text style={styles.text}>{file.name}</Text>
-        </View>
+        <Image source={{uri: file.path}} style={styles.image} />
       </View>
     </TouchableOpacity>
   );
@@ -96,7 +90,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 90,
-    height: 150,
+    height: 90,
     resizeMode: 'cover',
   },
   fullSizeWrapper: {
