@@ -8,6 +8,7 @@ const supportedLanguages = ['de', 'en'];
 
 const selectLanguage = () => {
   const userLngs = RNLocalize.getLocales().map(l => l.languageCode);
+  console.log(userLngs);
 
   let curLng = 'en';
 
@@ -16,9 +17,7 @@ const selectLanguage = () => {
 
   while (i < length) {
     if (supportedLanguages.includes(userLngs[i])) {
-      curLng = userLngs[i];
-      i = length;
-      return;
+      return userLngs[i];
     }
     i++;
   }
