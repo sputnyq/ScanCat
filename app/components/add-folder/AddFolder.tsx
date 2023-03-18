@@ -10,18 +10,17 @@ import {Colors, FontSizes} from '../../Styles';
 
 export default function AddFolder() {
   const currentDir = useSelector<RootState, string[]>(s => s.files.currentDir);
-
   const dispatch = useDispatch();
 
   const onOk = useCallback(
     async (nextDirName?: string) => {
       if (nextDirName) {
         const nextDir = buildDirPath([...currentDir, nextDirName]);
-        nextDirName && (await createDir(nextDir));
+        await createDir(nextDir);
         dispatch(pushDir({nextDir: nextDirName}));
       }
     },
-    [dispatch],
+    [dispatch, currentDir],
   );
 
   const onPress = async () => {

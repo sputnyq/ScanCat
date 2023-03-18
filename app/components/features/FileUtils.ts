@@ -16,7 +16,9 @@ export const moveFile = async (
 };
 
 export async function deleteFile(path: string) {
-  return RNFS.unlink(path);
+  return await RNFS.unlink(path).then(() => {
+    console.log('DELETE Ok');
+  });
 }
 
 const getNameFromFile = (path: string) => {

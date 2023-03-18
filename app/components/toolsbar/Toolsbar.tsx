@@ -1,17 +1,49 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {Button, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Colors} from '../../Styles';
 import i18n from '../../i18n';
 import AppModal from '../commons/AppModal';
 import SmileyIcon from '../icons/SmileyIcon';
 import Profile from '../profile/Profile';
+import {useAppFiles} from '../../hooks/useAppFiles';
+import {useDispatch, useSelector} from 'react-redux';
+import {popDir} from '../../store/reducers/filesReducer';
+import {buildDirPath, deleteFile} from '../features/FileUtils';
+import {RootState} from '../../store';
 
 export default function Toolsbar() {
+  const {appFiles} = useAppFiles();
+
+  const currentDir = useSelector<RootState, string[]>(s => s.files.currentDir);
+
+  const dispatch = useDispatch();
+
   const [visible, setVisible] = useState(false);
 
   const openProfileModal = () => {
     setVisible(true);
   };
+
+  const handleRemoveDirRequest = () => {
+    dispatch(popDir());
+    deleteFile(buildDirPath(currentDir));
+  };
+
+  const button = useMemo(() => {
+    if (currentDir.length === 0 && appFiles.length === 0) {
+      return null;
+    } else if (appFiles.length === 0) {
+      return (
+        <Button
+          color={Colors.red}
+          title={i18n('removeDir')}
+          onPress={handleRemoveDirRequest}
+        />
+      );
+    } else {
+      return <Button color={Colors.white} title={i18n('select')} />;
+    }
+  }, [appFiles, currentDir, handleRemoveDirRequest]);
 
   const closeProfileModal = () => {
     setVisible(false);
@@ -25,9 +57,7 @@ export default function Toolsbar() {
           <SmileyIcon />
         </TouchableOpacity>
       </View>
-      <View>
-        <Button color={Colors.white} title={i18n('select')}></Button>
-      </View>
+      <View>{button}</View>
       <AppModal onRequestClose={closeProfileModal} visible={visible}>
         <Profile />
       </AppModal>
