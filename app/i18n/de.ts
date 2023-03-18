@@ -12,6 +12,7 @@ const de = {
   remove: 'Entfernen',
   removePromptTitle: 'Scan löschen?',
   removePrompt: 'Du siehst es nie wieder...',
+  removeDir: 'Ordner löschen',
 };
 
 export default de;

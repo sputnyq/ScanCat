@@ -12,6 +12,7 @@ const en = {
   remove: 'Remove',
   removePromptTitle: 'Remove scan?',
   removePrompt: 'You will never see it again...',
+  removeDir: 'Remove folder',
 };
 
 export default en;
