@@ -1,30 +1,29 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 const initialState = {
-  appFiles: new Array<AppFile>(),
+  currentDir: new Array<string>(),
+  update: 1,
 };
 
 const filesSlice = createSlice({
   name: 'files',
   initialState,
   reducers: {
-    deleteSingleFile: (state, action: PayloadAction<{file: AppFile}>) => {
-      const {path} = action.payload.file;
-      state.appFiles = state.appFiles.filter(f => f.path !== path);
+    reloadDir: state => {
+      state.currentDir = [...state.currentDir];
+      state.update = Date.now();
     },
-    addSingleFile: (state, action: PayloadAction<{file: AppFile}>) => {
-      state.appFiles.push(action.payload.file);
+    pushDir: (state, action: PayloadAction<{nextDir: string}>) => {
+      const {nextDir} = action.payload;
+
+      state.currentDir.push(nextDir);
     },
-    addFiles: (state, action: PayloadAction<{files: AppFile[]}>) => {
-      state.appFiles.push(...action.payload.files);
-    },
-    clearFiles: state => {
-      state.appFiles = [];
+    popDir: state => {
+      state.currentDir.pop();
     },
   },
 });
 
-export const {addSingleFile, addFiles, clearFiles, deleteSingleFile} =
-  filesSlice.actions;
+export const {pushDir, popDir, reloadDir} = filesSlice.actions;
 
 export default filesSlice.reducer;
