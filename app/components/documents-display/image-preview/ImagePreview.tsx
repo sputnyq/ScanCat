@@ -35,7 +35,6 @@ export default function ImagePreview(props: Props) {
   };
 
   const createConfirmDeletionAlert = () => {
-    //TODO: translations
     Alert.alert(i18n('removePromptTitle'), i18n('removePrompt'), [
       {
         text: i18n('remove'),
@@ -66,9 +65,7 @@ export default function ImagePreview(props: Props) {
           </View>
         </View>
       </AppModal>
-      <View>
-        <Image source={{uri: file.path}} style={styles.image} />
-      </View>
+      <Image source={{uri: file.path}} style={styles.image} />
     </TouchableOpacity>
   );
 }
@@ -89,7 +86,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   image: {
-    width: 90,
+    width: 70,
     height: 90,
     resizeMode: 'cover',
   },

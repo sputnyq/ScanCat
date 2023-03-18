@@ -38,7 +38,11 @@ const styles = StyleSheet.create({
   root: {
     alignItems: 'center',
   },
-  preview: {},
+  preview: {
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   fileName: {
     color: Colors.white,
     fontSize: FontSizes.small,
