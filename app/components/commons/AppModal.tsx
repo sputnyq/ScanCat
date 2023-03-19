@@ -1,5 +1,12 @@
 import React from 'react';
-import {ModalProps, Button, Modal, View, StyleSheet} from 'react-native';
+import {
+  ModalProps,
+  Button,
+  Modal,
+  View,
+  StyleSheet,
+  SafeAreaView,
+} from 'react-native';
 import {Colors} from '../../Styles';
 import i18n from '../../i18n';
 import Grabber from './Grabber';
@@ -8,7 +15,7 @@ export default function AppModal(props: ModalProps) {
   const {onRequestClose} = props;
   return (
     <Modal presentationStyle="pageSheet" animationType="slide" {...props}>
-      <View style={styles.root}>
+      <SafeAreaView style={styles.root}>
         <Grabber />
         <View style={styles.bar}>
           <Button
@@ -18,7 +25,7 @@ export default function AppModal(props: ModalProps) {
           />
         </View>
         {props.children}
-      </View>
+      </SafeAreaView>
     </Modal>
   );
 }
@@ -31,5 +38,6 @@ const styles = StyleSheet.create({
   bar: {
     width: '100%',
     flexDirection: 'row-reverse',
+    paddingBottom: 5,
   },
 });
