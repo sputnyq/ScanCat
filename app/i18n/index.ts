@@ -8,7 +8,6 @@ const supportedLanguages = ['de', 'en'];
 
 const selectLanguage = () => {
   const userLngs = RNLocalize.getLocales().map(l => l.languageCode);
-  console.log(userLngs);
 
   let curLng = 'en';
 
