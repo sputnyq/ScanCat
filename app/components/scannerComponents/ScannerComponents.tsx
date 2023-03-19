@@ -12,6 +12,11 @@ import {moveFile, readFile} from '../features/FileUtils';
 
 export default function ScannerComponents() {
   const currentDir = useSelector<RootState, string[]>(s => s.files.currentDir);
+
+  const selectActive = useSelector<RootState, boolean>(
+    s => s.files.selectActive,
+  );
+
   const dispatch = useDispatch();
 
   const [scannedImages, setScannedImages] = useState<string[] | undefined>(
@@ -88,6 +93,9 @@ export default function ScannerComponents() {
       }
     });
   };
+  if (selectActive) {
+    return null;
+  }
 
   return <ScannerButton onPress={scanDocument} />;
 }

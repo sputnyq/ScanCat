@@ -10,8 +10,7 @@ const en = {
   format: 'Format',
   inputDirName: 'How should we call it?',
   remove: 'Remove',
-  removePromptTitle: 'Remove scan?',
-  removePrompt: 'You will never see it again...',
+  removePromptTitle: 'Remove file(s)?',
   removeDir: 'Remove folder',
 };
 
