@@ -21,7 +21,7 @@ export default function ImageModal({onRequestClose, visible, file}: Props) {
         <View style={styles.editBar}>
           <FileShare file={file} />
 
-          <FileDelete file={file} cb={onRequestClose} />
+          <FileDelete paths={[file.path]} cb={onRequestClose} />
         </View>
       </View>
     </AppModal>

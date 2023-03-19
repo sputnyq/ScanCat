@@ -8,6 +8,7 @@ type Props = {
 
 export default function ImagePreview(props: Props) {
   const {file} = props;
+
   const [showModal, setShowModal] = useState(false);
 
   const handleTouch = () => {

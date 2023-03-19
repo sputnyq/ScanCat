@@ -7,7 +7,7 @@ import SmileyIcon from '../icons/SmileyIcon';
 import Profile from '../profile/Profile';
 import {useAppFiles} from '../../hooks/useAppFiles';
 import {useDispatch, useSelector} from 'react-redux';
-import {popDir} from '../../store/reducers/filesReducer';
+import {popDir, setSelectActive} from '../../store/reducers/filesReducer';
 import {buildDirPath, deleteFile} from '../features/FileUtils';
 import {RootState} from '../../store';
 
@@ -16,8 +16,11 @@ export default function Toolsbar() {
 
   const currentDir = useSelector<RootState, string[]>(s => s.files.currentDir);
 
-  const dispatch = useDispatch();
+  const selectActive = useSelector<RootState, boolean>(
+    s => s.files.selectActive,
+  );
 
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
 
   const openProfileModal = () => {
@@ -29,19 +32,39 @@ export default function Toolsbar() {
     deleteFile(buildDirPath(currentDir));
   };
 
+  const handleSelectActiveChange = (active: boolean) => {
+    return function () {
+      dispatch(setSelectActive({active}));
+    };
+  };
+
   const button = useMemo(() => {
     if (currentDir.length === 0 && appFiles.length === 0) {
       return null;
     } else if (appFiles.length === 0) {
       return (
         <Button
-          color={Colors.red}
+          color={Colors.complementary}
           title={i18n('removeDir')}
           onPress={handleRemoveDirRequest}
         />
       );
-    } else {
-      return <Button color={Colors.white} title={i18n('select')} />;
+    } else if (selectActive) {
+      return (
+        <Button
+          onPress={handleSelectActiveChange(false)}
+          color={Colors.white}
+          title={i18n('cancel')}
+        />
+      );
+    } else if (!selectActive) {
+      return (
+        <Button
+          onPress={handleSelectActiveChange(true)}
+          color={Colors.white}
+          title={i18n('select')}
+        />
+      );
     }
   }, [appFiles, currentDir, handleRemoveDirRequest]);
 

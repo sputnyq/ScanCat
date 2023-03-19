@@ -8,22 +8,24 @@ import TouchableIcon from '../commons/TouchableIcon';
 import {deleteFile} from '../features/FileUtils';
 
 type Props = {
-  file: AppFile;
+  paths: string[];
   cb?: () => void;
 };
 
-export default function FileDelete({file, cb}: Props) {
+export default function FileDelete({paths, cb}: Props) {
   const dispatch = useDispatch();
 
   const onRequestDeleteFile = () => {
-    deleteFile(file.path).then(() => {
-      dispatch(reloadDir());
-      cb?.();
+    paths.forEach(async path => {
+      deleteFile(path).then(() => {
+        dispatch(reloadDir());
+        cb?.();
+      });
     });
   };
 
   const createConfirmDeletionAlert = () => {
-    Alert.alert(i18n('removePromptTitle'), i18n('removePrompt'), [
+    Alert.alert(i18n('removePromptTitle'), undefined, [
       {
         text: i18n('remove'),
         style: 'destructive',
@@ -35,10 +37,11 @@ export default function FileDelete({file, cb}: Props) {
       },
     ]);
   };
+  const disabled = paths.length === 0;
   return (
     <TouchableIcon
-      touchProps={{onPress: createConfirmDeletionAlert}}
-      iconProps={{name: 'ios-trash-outline', color: Colors.red}}
+      touchProps={{onPress: createConfirmDeletionAlert, disabled}}
+      iconProps={{name: 'ios-trash-outline', color: Colors.complementary}}
     />
   );
 }

@@ -7,9 +7,14 @@ import {RootState} from '../../../store';
 import {popDir} from '../../../store/reducers/filesReducer';
 import AddFolder from '../../add-folder/AddFolder';
 import TouchableIcon from '../../commons/TouchableIcon';
+import RemoveFiles from '../../remove-files/RemoveFiles';
 
 export default function FolderBar() {
   const currentDir = useSelector<RootState, string[]>(s => s.files.currentDir);
+
+  const selectActive = useSelector<RootState, boolean>(
+    s => s.files.selectActive,
+  );
 
   const dispatch = useDispatch();
 
@@ -41,7 +46,7 @@ export default function FolderBar() {
       <Text adjustsFontSizeToFit numberOfLines={1} style={styles.header}>
         {curFolder}
       </Text>
-      <AddFolder />
+      {selectActive ? <RemoveFiles /> : <AddFolder />}
     </View>
   );
 }
