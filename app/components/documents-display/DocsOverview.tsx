@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import FileRenderer from './FileRenderer';
 
@@ -6,14 +6,24 @@ type Props = {
   appFiles: AppFile[];
 };
 
-export default function DocsOverview({appFiles}: Props) {
-  const sorted = [...appFiles].sort((a, b) => {
-    return (b.timeStamp || 0) - (a.timeStamp || 0);
-  });
+const SORT_VALUES = {
+  folder: 1,
+  file: 0,
+};
 
-  const itemData = sorted.map(file => ({
-    renderer: <FileRenderer file={file} />,
-  }));
+export default function DocsOverview({appFiles}: Props) {
+  const itemData = useMemo(() => {
+    return [...appFiles]
+      .sort((a, b) => {
+        return (b.timeStamp || 0) - (a.timeStamp || 0);
+      })
+      .sort((a, b) => {
+        return SORT_VALUES[b.type] - SORT_VALUES[a.type];
+      })
+      .map(file => ({
+        renderer: <FileRenderer file={file} />,
+      }));
+  }, [appFiles]);
 
   return (
     <View style={styles.root}>

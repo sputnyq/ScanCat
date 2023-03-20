@@ -1,4 +1,5 @@
 import React from 'react';
+import {ColorValue} from 'react-native';
 import {Alert} from 'react-native';
 import {useDispatch} from 'react-redux';
 import i18n from '../../i18n';
@@ -10,9 +11,10 @@ import {deleteFile} from '../features/FileUtils';
 type Props = {
   paths: string[];
   cb?: () => void;
+  color?: number | ColorValue | undefined;
 };
 
-export default function FileDelete({paths, cb}: Props) {
+export default function FileDelete({paths, cb, color = Colors.white}: Props) {
   const dispatch = useDispatch();
 
   const onRequestDeleteFile = () => {
@@ -41,7 +43,7 @@ export default function FileDelete({paths, cb}: Props) {
   return (
     <TouchableIcon
       touchProps={{onPress: createConfirmDeletionAlert, disabled}}
-      iconProps={{name: 'ios-trash-outline', color: Colors.complementary}}
+      iconProps={{name: 'ios-trash-outline', color}}
     />
   );
 }
