@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ImageModal from '../../image-modal/ImageModal';
 
 type Props = {
@@ -18,6 +18,14 @@ export default function ImagePreview(props: Props) {
   const closeModal = () => {
     setShowModal(false);
   };
+
+  if (file.name.endsWith('pdf')) {
+    return (
+      <View>
+        <Text>{file.name}</Text>
+      </View>
+    );
+  }
 
   return (
     <TouchableOpacity onPress={handleTouch}>
