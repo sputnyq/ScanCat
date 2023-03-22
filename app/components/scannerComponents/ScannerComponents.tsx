@@ -4,11 +4,12 @@ import DocumentScanner, {
   ScanDocumentResponseStatus,
 } from 'react-native-document-scanner-plugin';
 import {useDispatch, useSelector} from 'react-redux';
-import {Alert} from 'react-native';
+import {Alert, Settings} from 'react-native';
 import i18n from '../../i18n';
 import {RootState} from '../../store';
 import {reloadDir} from '../../store/reducers/filesReducer';
 import {moveFile, readFile} from '../features/FileUtils';
+import {IS_PDF} from '../settings/SettingsKeys';
 
 export default function ScannerComponents() {
   const currentDir = useSelector<RootState, string[]>(s => s.files.currentDir);
@@ -49,6 +50,10 @@ export default function ScannerComponents() {
     }
   };
 
+  const createPdf = () => {
+    return setScannedImages(undefined);
+  };
+
   const onOk = async (value?: string) => {
     if (!scannedImages) {
       return;
@@ -56,6 +61,12 @@ export default function ScannerComponents() {
 
     if (!value) {
       value = getDefaultFileName();
+    }
+
+    const isPdf = Settings.get(IS_PDF);
+
+    if (isPdf) {
+      return createPdf();
     }
 
     const filesAmount = scannedImages.length;
@@ -85,8 +96,6 @@ export default function ScannerComponents() {
   };
 
   const scanDocument = () => {
-    // const isPdf = Settings.get(IS_PDF);
-
     DocumentScanner.scanDocument().then(res => {
       if (res?.status === ScanDocumentResponseStatus.Success) {
         setScannedImages(res.scannedImages);
