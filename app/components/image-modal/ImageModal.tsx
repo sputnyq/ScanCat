@@ -13,7 +13,10 @@ type Props = {
 
 export default function ImageModal({onRequestClose, visible, file}: Props) {
   return (
-    <AppModal visible={visible} onRequestClose={onRequestClose}>
+    <AppModal
+      visible={visible}
+      onRequestClose={onRequestClose}
+      title={file.name}>
       <View style={styles.rootFullSize}>
         <View style={styles.fullSizeWrapper}>
           <Image style={styles.fullSize} source={{uri: file.path}} />
@@ -21,7 +24,11 @@ export default function ImageModal({onRequestClose, visible, file}: Props) {
         <View style={styles.editBar}>
           <FileShare file={file} />
 
-          <FileDelete paths={[file.path]} cb={onRequestClose} />
+          <FileDelete
+            paths={[file.path]}
+            cb={onRequestClose}
+            color={Colors.main}
+          />
         </View>
       </View>
     </AppModal>

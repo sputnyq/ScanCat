@@ -7,7 +7,7 @@ import {Colors} from '../../Styles';
 export default function CheckBox(props: IBouncyCheckboxProps) {
   return (
     <BouncyCheckbox
-      fillColor={Colors.complementary}
+      fillColor={Colors.gray300}
       unfillColor={Colors.white}
       size={30}
       {...props}
