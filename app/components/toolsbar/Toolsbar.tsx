@@ -7,7 +7,7 @@ import {RootState} from '../../store';
 import {popDir, setSelectActive} from '../../store/reducers/filesReducer';
 import {Colors} from '../../Styles';
 import AppModal from '../commons/AppModal';
-import TouchableIcon from '../commons/TouchableIcon';
+// import TouchableIcon from '../commons/TouchableIcon';
 import {buildDirPath, deleteFile} from '../features/FileUtils';
 import Profile from '../profile/Profile';
 
@@ -67,7 +67,7 @@ export default function Toolsbar() {
   return (
     <View style={styles.root}>
       <View>
-        <TouchableIcon
+        {/* <TouchableIcon
           touchProps={{
             onPress: () => setShowSettingsModal(true),
           }}
@@ -75,7 +75,7 @@ export default function Toolsbar() {
             name: 'ios-settings-outline',
             color: Colors.white,
           }}
-        />
+        /> */}
       </View>
       <View>{button}</View>
       <AppModal
